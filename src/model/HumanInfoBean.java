@@ -220,4 +220,14 @@ public class HumanInfoBean implements java.io.Serializable {
 		this.contactPersionTel = contactPersionTel;
 	}
 
+	@Override
+	public String toString() {
+		return "HumanInfoBean [id=" + id + ", workNum=" + workNum + ", account=" + account + ", password=" + password
+				+ ", name=" + name + ", sex=" + sex + ", dutyDate=" + dutyDate + ", resignationDate=" + resignationDate
+				+ ", grade=" + grade + ", class_=" + class_ + ", area=" + area + ", email=" + email + ", permission="
+				+ permission + ", birthday=" + birthday + ", tel=" + tel + ", contactPersion=" + contactPersion
+				+ ", contactPersionTel=" + contactPersionTel + "]";
+	}
+	
+
 }
