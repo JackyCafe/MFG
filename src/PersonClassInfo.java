@@ -1,14 +1,11 @@
-package model;
 // default package
-// Generated 2018/8/10 �U�� 02:34:36 by Hibernate Tools 5.1.8.Final
+// Generated 2018/8/14 �W�� 10:17:46 by Hibernate Tools 5.1.8.Final
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,18 +15,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "person_class_info", catalog = "mfg_world")
-public class PersonClassInfoBean implements java.io.Serializable {
+public class PersonClassInfo implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private String workNum;
 	private String name;
 	private String className;
-	private Set<PersonClassRecordBean> personClassRecords = new HashSet<PersonClassRecordBean>(0);
+	private Set<PersonClassRecord> personClassRecords = new HashSet<PersonClassRecord>(0);
 
-	public PersonClassInfoBean() {
+	public PersonClassInfo() {
 	}
 
-	public PersonClassInfoBean(String workNum, String name, String className, Set<PersonClassRecordBean> personClassRecords) {
+	public PersonClassInfo(int id) {
+		this.id = id;
+	}
+
+	public PersonClassInfo(int id, String workNum, String name, String className,
+			Set<PersonClassRecord> personClassRecords) {
+		this.id = id;
 		this.workNum = workNum;
 		this.name = name;
 		this.className = className;
@@ -37,14 +40,13 @@ public class PersonClassInfoBean implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -76,19 +78,12 @@ public class PersonClassInfoBean implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personClassInfo")
-	public Set<PersonClassRecordBean> getPersonClassRecords() {
+	public Set<PersonClassRecord> getPersonClassRecords() {
 		return this.personClassRecords;
 	}
 
-	public void setPersonClassRecords(Set<PersonClassRecordBean> personClassRecords) {
+	public void setPersonClassRecords(Set<PersonClassRecord> personClassRecords) {
 		this.personClassRecords = personClassRecords;
 	}
 
-	@Override
-	public String toString() {
-		return "PersonClassInfoBean [id=" + id + ", workNum=" + workNum + ", name=" + name + ", className=" + className
-				+ ", personClassRecords=" + personClassRecords + "]";
-	}
-
-	
 }

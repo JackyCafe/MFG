@@ -1,13 +1,10 @@
-package model;
 // default package
-// Generated 2018/8/10 �U�� 02:34:36 by Hibernate Tools 5.1.8.Final
+// Generated 2018/8/14 �W�� 10:17:46 by Hibernate Tools 5.1.8.Final
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,18 +17,24 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "person_class_record", catalog = "mfg_world")
-public class PersonClassRecordBean implements java.io.Serializable {
+public class PersonClassRecord implements java.io.Serializable {
 
-	private Integer id;
-	private PersonClassInfoBean personClassInfo;
+	private int id;
+	private PersonClassInfo personClassInfo;
 	private Date classDate;
 	private Date testDate;
 	private Integer testScore;
 
-	public PersonClassRecordBean() {
+	public PersonClassRecord() {
 	}
 
-	public PersonClassRecordBean(PersonClassInfoBean personClassInfo, Date classDate, Date testDate, Integer testScore) {
+	public PersonClassRecord(int id) {
+		this.id = id;
+	}
+
+	public PersonClassRecord(int id, PersonClassInfo personClassInfo, Date classDate, Date testDate,
+			Integer testScore) {
+		this.id = id;
 		this.personClassInfo = personClassInfo;
 		this.classDate = classDate;
 		this.testDate = testDate;
@@ -39,24 +42,23 @@ public class PersonClassRecordBean implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "person_class_id")
-	public PersonClassInfoBean getPersonClassInfo() {
+	public PersonClassInfo getPersonClassInfo() {
 		return this.personClassInfo;
 	}
 
-	public void setPersonClassInfo(PersonClassInfoBean personClassInfo) {
+	public void setPersonClassInfo(PersonClassInfo personClassInfo) {
 		this.personClassInfo = personClassInfo;
 	}
 
@@ -87,12 +89,6 @@ public class PersonClassRecordBean implements java.io.Serializable {
 
 	public void setTestScore(Integer testScore) {
 		this.testScore = testScore;
-	}
-
-	@Override
-	public String toString() {
-		return "PersonClassRecordBean [id=" + id + ", personClassInfo=" + personClassInfo + ", classDate=" + classDate
-				+ ", testDate=" + testDate + ", testScore=" + testScore + "]";
 	}
 
 }

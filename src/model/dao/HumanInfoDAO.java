@@ -61,20 +61,35 @@ public class HumanInfoDAO implements IDAO<HumanInfoBean>{
 			System.out.println(e.getMessage());
 		}
 
-		/* update 
+		/* update*/ 
 		try {
 			session = factory.getCurrentSession();
 			trx = dao.getSession().beginTransaction();
 			HumanInfoBean bean = new HumanInfoBean();			
-			bean.setId(0);
-			 
+			bean.setId(2);			
+			bean.setWorkNum("00211");
+			bean.setAccount("Simon");
+			bean.setPassword("p@ssw0rd");
+			bean.setName("王東為");
+			bean.setSex("F");
+			bean.setDutyDate(null);
+			bean.setResignationDate(null);
+			bean.setGrade(2);
+			bean.setClass_("");
+			bean.setArea("");
+			bean.setEmail("");
+			bean.setPermission("A");
+			bean.setBirthday(null);
+			bean.setTel("");
+			bean.setContactPersion("");
+			bean.setContactPersionTel(""); 
 			HumanInfoBean update = dao.update(bean);			
 			System.out.println("update" + update);
 			trx.commit();
 
 		} catch (Exception e) {
 
-		}*/
+		}
 		// Select
 		try {
 			session = factory.getCurrentSession();
@@ -156,7 +171,23 @@ public class HumanInfoDAO implements IDAO<HumanInfoBean>{
 	public HumanInfoBean update(HumanInfoBean bean) {
 		HumanInfoBean tmp = select(bean.getId());
 		if (tmp != null) {
-			 
+			tmp.setId(bean.getId());			
+			tmp.setWorkNum(bean.getWorkNum());
+			tmp.setAccount(bean.getAccount());
+			tmp.setPassword(bean.getPassword());
+			tmp.setName(bean.getName());
+			tmp.setSex(bean.getSex());
+			tmp.setDutyDate(bean.getDutyDate());
+			tmp.setResignationDate(bean.getResignationDate());
+			tmp.setGrade(bean.getGrade());
+			tmp.setClass_(bean.getClass_());
+			tmp.setArea(bean.getArea());
+			tmp.setEmail(bean.getEmail());
+			tmp.setPermission(bean.getPermission());
+			tmp.setBirthday(bean.getBirthday());
+			tmp.setTel(bean.getTel());
+			tmp.setContactPersion(bean.getContactPersion());
+			tmp.setContactPersionTel(bean.getContactPersionTel()); 
 		}
 		return tmp;
 	}
