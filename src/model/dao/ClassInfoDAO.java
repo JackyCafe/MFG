@@ -9,18 +9,18 @@ import org.hibernate.Transaction;
 import misc.HibernateUtil;
 import model.ClassInfoBean;
 
-public class ClassInfoDAO implements IDAO<ClassInfoBean>{
+public class ClassInfoDAO extends DAO implements IDAO<ClassInfoBean>{
+
+	
 
 	public static SessionFactory factory;
 	public static Session session;
 	private static Transaction trx;
 	
-	public ClassInfoDAO(SessionFactory factory)
-	{
-		this.factory = factory;
-	}
-	
-	
+	 
+	public ClassInfoDAO(SessionFactory factory) {
+		super(factory);
+ 	}
 	public static void main(String[] args) {
 		test();
 		
@@ -30,39 +30,7 @@ public class ClassInfoDAO implements IDAO<ClassInfoBean>{
 		factory = HibernateUtil.getSessionFactory();
 		session = factory.getCurrentSession();
 		ClassInfoDAO dao = new ClassInfoDAO(factory);
-		// insert
-		try {
-			trx = dao.getSession().beginTransaction();
-			ClassInfoBean bean = new ClassInfoBean();			
-			bean.setId(0);
-			bean.setClassName("結晶矽作業區介紹");
-			bean.setLevel("1");
-			bean.setGrade("1");
-			ClassInfoBean insert = dao.insert(bean);
-			System.out.println("insert" + insert);
-			trx.commit();
-		} catch (Exception e) {
-			for (StackTraceElement s : e.getStackTrace())
-				System.out.println(s.toString());
-			System.out.println(e.getMessage());
-		}
-
-		/* update */
-		try {
-			session = factory.getCurrentSession();
-			trx = dao.getSession().beginTransaction();
-			ClassInfoBean bean = new ClassInfoBean();			
-			bean.setId(0);
-			bean.setClassName("結晶矽作業區介紹");
-			bean.setLevel("2");
-			bean.setGrade("1");
-			ClassInfoBean update = dao.update(bean);			
-			System.out.println("update" + update);
-			trx.commit();
-
-		} catch (Exception e) {
-
-		}
+		 
 		// Select
 		try {
 			session = factory.getCurrentSession();
@@ -72,20 +40,12 @@ public class ClassInfoDAO implements IDAO<ClassInfoBean>{
 			trx.commit();
 
 		} catch (Exception e) {
-
-		}
+			for(StackTraceElement st :e.getStackTrace())
+			System.out.println(st.toString());
+			trx.rollback();
+		}	
 		
-		// delete
-		try {
-					session = factory.getCurrentSession();
-					trx = session.beginTransaction();
-					Boolean delete = dao.delete(3);
-					trx.commit();
-					System.out.println("delete "+ delete);
-
-				} catch (Exception e) {
-
-				}
+		 
 	}
 
 
@@ -152,11 +112,7 @@ public class ClassInfoDAO implements IDAO<ClassInfoBean>{
 		return tmp;
 	}
 
-	@Override
-	public Session getSession() {
-		return factory.getCurrentSession();
-		
-	}
+	 
 
 	
 	

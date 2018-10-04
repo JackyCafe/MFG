@@ -9,10 +9,11 @@
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="current_session_context_class">thread</property>
-  
   <mapping class="model.HumanInfoBean"/>
   <mapping class="model.ClassInfoBean"/>
   <mapping class="model.PersonClassInfoBean"/>
   <mapping class="model.PersonClassRecordBean"/>
+  <mapping class="model.CertificationItemBean"/>
+  <mapping class="model.PersonCertificationInfoBean"/>
  </session-factory>
 </hibernate-configuration>

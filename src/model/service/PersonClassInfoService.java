@@ -23,27 +23,31 @@ public class PersonClassInfoService implements IService<PersonClassInfoBean>{
 			bean.setId(0);
 			bean.setWorkNum("00409");
 			bean.setName("林彥亨");
-			bean.setClassName("製造組人員規範");
+			bean.setClassName("結晶矽作業區介紹");
 			bean.setPersonClassRecords(null);
 			service.insert(bean);
 			trx.commit();
 		}catch(Exception e) {
 			trx.rollback();
 		}		
-		
-		
+		*/
+		System.out.println("here");
 		try {
-			trx = dao.getSession().beginTransaction();
-			List<PersonClassInfoBean> select = service.select();
-			System.out.println(select);
+			//trx = dao.getSession().beginTransaction();
+			List<PersonClassInfoBean> select = service.select("結晶矽作業區介紹");
+			for(PersonClassInfoBean bean:select)
+			{
+				System.out.println(bean);
+			}
 			trx.commit();
 		}catch(Exception e) {
+			System.out.println(e.toString());
 			trx.rollback();
-		}*/
-		
+		}
+		/*
 		try {
 			trx = dao.getSession().getTransaction();					
-			boolean isX = service.isExist("林彥亨", "製造組人員規範");
+			boolean isX = service.isExist("林彥亨", "結晶矽作業區介紹");
 			System.out.println(isX);
 			trx.commit();
 		}catch(Exception e)
@@ -51,9 +55,14 @@ public class PersonClassInfoService implements IService<PersonClassInfoBean>{
 			System.out.println(e.toString());
 			trx.rollback();
 		}
+		*/
 	
 	}
 	
+	private List<PersonClassInfoBean> select(String string) {
+ 		return dao.select("結晶矽作業區介紹");
+	}
+
 	public PersonClassInfoService(PersonClassInfoDAO dao) {
 		this.dao = dao;
 	}

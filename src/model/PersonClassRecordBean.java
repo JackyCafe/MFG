@@ -91,7 +91,7 @@ public class PersonClassRecordBean implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "PersonClassRecordBean [id=" + id + ", personClassInfo=" + personClassInfo + ", classDate=" + classDate
+		return "PersonClassRecordBean [id=" + id + ", personClassInfo=" +personClassInfo  + ", classDate=" + classDate
 				+ ", testDate=" + testDate + ", testScore=" + testScore + "]";
 	}
 

@@ -82,7 +82,7 @@ public class HumanInfoBean implements java.io.Serializable {
 		this.workNum = workNum;
 	}
 
-	@Column(name = "account", length = 5)
+	@Column(name = "account", length = 15)
 	public String getAccount() {
 		return this.account;
 	}

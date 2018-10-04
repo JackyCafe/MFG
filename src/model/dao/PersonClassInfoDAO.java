@@ -15,47 +15,22 @@ import misc.HibernateUtil;
 import model.PersonClassInfoBean;
 import model.PersonClassRecordBean;
 
-public class PersonClassInfoDAO implements IDAO<PersonClassInfoBean> {
+public class PersonClassInfoDAO extends DAO implements IDAO<PersonClassInfoBean> {
+	
+	public PersonClassInfoDAO(SessionFactory factory) {
+		super(factory);
+ 	}
+
 	public static SessionFactory factory;
 	private static Session session;
 	private static Transaction trx;
-	public PersonClassInfoDAO(SessionFactory factory) {this.factory = factory;}
-	
+ 	
 	public static void main(String[] args) {
 		factory = HibernateUtil.getSessionFactory();
 		session = factory.getCurrentSession();
 		PersonClassInfoDAO dao = new PersonClassInfoDAO(factory);
 		
-		/*Insert*/
-		try {
-			trx = dao.getSession().beginTransaction();
-			PersonClassInfoBean bean = new PersonClassInfoBean();
-			bean.setId(0);
-			bean.setWorkNum("00409");
-			bean.setName("林彥亨");
-			bean.setClassName("結晶矽作業區介紹");	
-			PersonClassRecordBean records = new PersonClassRecordBean();
-			records.setId(0);
-			records.setClassDate(new Date());
-			records.setTestDate(new Date());
-			records.setTestScore(100);
-	
-			Set<PersonClassRecordBean> personClassRecords = new HashSet<>();
-			personClassRecords.add(records);
-			bean.setPersonClassRecords(personClassRecords );
-			PersonClassInfoBean insert = dao.insert(bean);
-			System.out.println(insert);
-			trx.commit();
-		}catch(Exception e) {
-			for (StackTraceElement st:e.getStackTrace())
-			{
-				System.out.println("error :"+st.getLineNumber());
-			}
-			
-			
-			trx.rollback();
-		}
-		
+		 
 		/*select*/
 		try {
 			trx = dao.getSession().beginTransaction();
@@ -96,7 +71,14 @@ public class PersonClassInfoDAO implements IDAO<PersonClassInfoBean> {
  				.getResultList();
 	}
 	
-	/*判斷人員課程資料是否存在*/
+ 	public List<PersonClassInfoBean> select(String classname) {
+ 		return this.getSession()
+ 				.createQuery("from PersonClassInfoBean where className =:classname", PersonClassInfoBean.class)
+ 				.setParameter("classname", classname)
+ 				.getResultList();
+	}
+	
+	/* 確認人員檔案是否存在*/
 	public boolean isExist(String name,String className)
 	{
 		boolean isX = true;
@@ -162,9 +144,6 @@ public class PersonClassInfoDAO implements IDAO<PersonClassInfoBean> {
 		}
 	}
 
-	@Override
-	public Session getSession() {
- 		return factory.getCurrentSession();
-	}
+	 
 
 }

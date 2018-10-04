@@ -10,22 +10,22 @@ import org.hibernate.Transaction;
 import misc.HibernateUtil;
 import model.HumanInfoBean;
 
-public class HumanInfoDAO implements IDAO<HumanInfoBean>{
+public class HumanInfoDAO extends DAO  implements IDAO<HumanInfoBean>{
 
+	
+	
 	public static SessionFactory factory;
 	public static Session session;
 	private static Transaction trx;
-	
-	public HumanInfoDAO(SessionFactory factory)
-	{
-		this.factory = factory;
-	}
-	
-	
+	 
+
 	public static void main(String[] args) {
-		test();
-		
+		test();		
 	}
+	
+	public HumanInfoDAO(SessionFactory factory) {
+		super(factory);
+ 	}
 
 	private static void test() {
 		factory = HibernateUtil.getSessionFactory();
@@ -192,11 +192,7 @@ public class HumanInfoDAO implements IDAO<HumanInfoBean>{
 		return tmp;
 	}
 
-	@Override
-	public Session getSession() {
-		return factory.getCurrentSession();
-		
-	}
+ 
 
 	
 	

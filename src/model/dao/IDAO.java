@@ -14,6 +14,5 @@ public interface IDAO<T> {
 	public abstract Boolean delete(T bean);
 	public abstract Boolean delete(int id);
 	public abstract T update(T bean);
-	public abstract Session getSession();
-
+ 
 }

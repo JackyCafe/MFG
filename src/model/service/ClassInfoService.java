@@ -29,8 +29,7 @@ public class ClassInfoService implements IService<ClassInfoBean> {
 				String level = (String) row[0];
 				long level_count = (long) row[1]; 
 				System.out.println(level+":"+level_count);
-				//System.out.println(row[0]+":"+row[1]);
-			}
+ 			}
 			
 		}catch(Exception e)
 		{
@@ -45,8 +44,7 @@ public class ClassInfoService implements IService<ClassInfoBean> {
 		try {
 			trx = dao.getSession().beginTransaction();
 			List<ClassInfoBean> select = service.select();			
-			System.out.println(select);
-			trx.commit();
+ 			trx.commit();
 		} catch (Exception e) {
 			for (StackTraceElement s: e.getStackTrace())
 			{
